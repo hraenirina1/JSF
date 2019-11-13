@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewVolTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewVolLabel_NVol}"/>
+                    <h:outputText value="#{volController.selected.NVol}" title="#{bundle.ViewVolTitle_NVol}"/>
+                    <h:outputText value="#{bundle.ViewVolLabel_avion}"/>
+                    <h:outputText value="#{volController.selected.avion}" title="#{bundle.ViewVolTitle_avion}"/>
+                    <h:outputText value="#{bundle.ViewVolLabel_heureDepart}"/>
+                    <h:outputText value="#{volController.selected.heureDepart}" title="#{bundle.ViewVolTitle_heureDepart}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewVolLabel_heureArrive}"/>
+                    <h:outputText value="#{volController.selected.heureArrive}" title="#{bundle.ViewVolTitle_heureArrive}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewVolLabel_villeDepart}"/>
+                    <h:outputText value="#{volController.selected.villeDepart}" title="#{bundle.ViewVolTitle_villeDepart}"/>
+                    <h:outputText value="#{bundle.ViewVolLabel_vileArrive}"/>
+                    <h:outputText value="#{volController.selected.vileArrive}" title="#{bundle.ViewVolTitle_vileArrive}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{volController.destroyAndView}" value="#{bundle.ViewVolDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewVolEditLink}"/>
+                <br />
+                <h:commandLink action="#{volController.prepareCreate}" value="#{bundle.ViewVolCreateLink}" />
+                <br />
+                <h:commandLink action="#{volController.prepareList}" value="#{bundle.ViewVolShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewVolIndexLink}"/>
+
+            </h:form>
+            
+            <h:form styleClass="jsfcrud_list_form">
+        <!--message a affiche si vide-->
+                <h:outputText escape="false" value="#{bundle.ListPlaceEmpty}" rendered="#{avionController.avionplace.listePlace.rowCount == 0 }"/>
+                
+                <!--table des places-->
+                <h:panelGroup rendered="#{volController.avionplace.listePlace.rowCount > 0}">
+                <h:outputText value="#{volController.avionplace.pagination.pageFirstItem + 1}..#{volController.avionplace.pagination.pageLastItem + 1}/#{volController.avionplace.pagination.itemsCount}"/>&nbsp;
+                    
+                    <h:commandLink action="#{volController.avionplace.previous}" value="#{bundle.Previous} #{volController.avionplace.pagination.pageSize}" rendered="#{volController.avionplace.pagination.hasPreviousPage}"/>&nbsp;
+                    
+                    <h:commandLink action="#{volController.avionplace.next}" value="#{bundle.Next} #{volController.avionplace.pagination.pageSize}" rendered="#{volController.avionplace.pagination.hasNextPage}"/>&nbsp;
+                    
+            <h:dataTable value="#{volController.avionplace.listePlace}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlaceTitle_avion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlaceTitle_occupation}"/>
+                            </f:facet>  
+                            <h:outputText value="#{item.occupation}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup></h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAvionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            
+            <!-- formulaire -->
+            <h:form styleClass="jsfcrud_list_form">
+                
+                <!-- message -->
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                
+                <!-- afficher texte si table vide -->  
+                <h:outputText escape="false" value="#{bundle.ListAvionEmpty}" rendered="#{avionController.items.rowCount == 0}"/>
+                
+                <!-- tables des avions -->
+                <h:panelGroup rendered="#{avionController.items.rowCount > 0}">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="content-panel col-md-12 col-sm-12">
+                            
+                             <div class="col-sm-12 col-md-6 col-md-offset-6">
+                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">                                    
+                                    <ul class="pagination">
+                                        
+                                        <li class="paginate_button page-item previous #{ avionController.pagination.PreviousExiste()}">
+                                            <h:commandLink action="#{avionController.previous}" class="page-link"> 
+                                                Précédent </h:commandLink>
+                                        </li>
+                                        
+                                        <ui:repeat value="#{avionController.pagination.list_page()}" var="page">
+                                        <li class="paginate_button page-item #{(page==(avionController.pagination.page + 1))? 'active' : '' } ">
+                                            <h:commandLink action="#{avionController.goPage(page)}" styleClass="page-link"> #{ page }</h:commandLink>
+                                        </li>
+                                        </ui:repeat>
+                                        <li class="paginate_button page-item next #{ avionController.pagination.NextExiste()}">
+                                            <h:commandLink action="#{avionController.next}" styleClass="page-link"> 
+                                                Suivant</h:commandLink></li>
+                                    </ul>
+                                </div>
+                            </div>  
+                            
+                            <h:dataTable styleClass="table table-striped table-advance table-hover" value="#{avionController.items}" var="item" border="0" cellpadding="2" cellspacing="0">
+                                <h:column>
+                                    <f:facet name="header" class="df" id="fff">
+                                        <i class="fa fa-bullhorn"></i><h:outputText value="#{bundle.ListAvionTitle_NAvion}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.NAvion}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <i class="fa fa-bullhorn"></i><h:outputText value="#{bundle.ListAvionTitle_type}"/>
+                                    </f:facet>                                    
+                                    <h:outputText value="#{item.type}"/>
+                                </h:column>
+                                <h:column class="centerr">
+                                    <f:facet name="header">
+                                        <i class="fa fa-bullhorn"></i><h:outputText value="#{bundle.ListAvionTitle_nbPlace}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nbPlace}" />
+                                </h:column>
+                                <h:column >
+                                    <f:facet name="header">
+                                        <h:outputText value="&nbsp;"/>
+                                    </f:facet>
+                                    <h:commandLink action="#{avionController.prepareView}">
+                                        <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                    </h:commandLink>
+
+                                    <h:commandLink action="#{avionController.prepareEdit}">
+                                        <button class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></button>
+                                    </h:commandLink>
+
+                                    <h:commandLink action="#{avionController.destroy}">                                
+                                        <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                    </h:commandLink>
+                                </h:column>
+                            </h:dataTable>
+
+                                               
+                        </div>
+                        <!-- /content-panel -->
+                      </div>
+                      <!-- /col-md-12 -->
+                    
+                </h:panelGroup>
+                
+                <br />
+                <br />
+                              
+            </h:form>
+            
+            
+        </ui:define>
+    </ui:composition>
+
+</html>

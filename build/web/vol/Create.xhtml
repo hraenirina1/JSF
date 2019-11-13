@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateVolTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateVolLabel_NVol}" for="NVol" />
+                    <h:inputText id="NVol" value="#{volController.selected.NVol}" title="#{bundle.CreateVolTitle_NVol}" required="true" requiredMessage="#{bundle.CreateVolRequiredMessage_NVol}"/>
+                    <h:outputLabel value="#{bundle.CreateVolLabel_avion}" for="avion" />
+                    <h:selectOneMenu id="avion" value="#{volController.selected.avion}" title="#{bundle.CreateVolTitle_avion}" required="true" requiredMessage="#{bundle.CreateVolRequiredMessage_avion}">
+                        <f:selectItems value="#{avionController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateVolLabel_heureDepart}" for="heureDepart" />
+                    <h:inputText id="heureDepart" value="#{volController.selected.heureDepart}" title="#{bundle.CreateVolTitle_heureDepart}" required="true" requiredMessage="#{bundle.CreateVolRequiredMessage_heureDepart}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateVolLabel_heureArrive}" for="heureArrive" />
+                    <h:inputText id="heureArrive" value="#{volController.selected.heureArrive}" title="#{bundle.CreateVolTitle_heureArrive}" required="true" requiredMessage="#{bundle.CreateVolRequiredMessage_heureArrive}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateVolLabel_villeDepart}" for="villeDepart" />
+                    <h:inputText id="villeDepart" value="#{volController.selected.villeDepart}" title="#{bundle.CreateVolTitle_villeDepart}" required="true" requiredMessage="#{bundle.CreateVolRequiredMessage_villeDepart}"/>
+                    <h:outputLabel value="#{bundle.CreateVolLabel_vileArrive}" for="vileArrive" />
+                    <h:inputText id="vileArrive" value="#{volController.selected.vileArrive}" title="#{bundle.CreateVolTitle_vileArrive}" required="true" requiredMessage="#{bundle.CreateVolRequiredMessage_vileArrive}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{volController.create}" value="#{bundle.CreateVolSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{volController.prepareList}" value="#{bundle.CreateVolShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateVolIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

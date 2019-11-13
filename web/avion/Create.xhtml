@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateAvionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            
+            <!--message-->
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            
+            <!--formuaire de creation-->
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateAvionLabel_NAvion}" for="NAvion" />
+                    <h:inputText id="NAvion" value="#{avionController.selected.NAvion}" title="#{bundle.CreateAvionTitle_NAvion}" required="true" requiredMessage="#{bundle.CreateAvionRequiredMessage_NAvion}"/>
+                    <h:outputLabel value="#{bundle.CreateAvionLabel_type}" for="type" />
+                    <h:inputText id="type" value="#{avionController.selected.type}" title="#{bundle.CreateAvionTitle_type}" required="true" requiredMessage="#{bundle.CreateAvionRequiredMessage_type}"/>
+                    <h:outputLabel value="#{bundle.CreateAvionLabel_nbPlace}" for="nbPlace" />
+                    <h:inputText id="nbPlace" value="#{avionController.selected.nbPlace}" title="#{bundle.CreateAvionTitle_nbPlace}" required="true" requiredMessage="#{bundle.CreateAvionRequiredMessage_nbPlace}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{avionController.create}" value="#{bundle.CreateAvionSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{avionController.prepareList}" value="#{bundle.CreateAvionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateAvionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

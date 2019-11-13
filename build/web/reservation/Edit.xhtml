@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditReservationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditReservationLabel_NReservation}" for="NReservation" />
+                    <h:inputText id="NReservation" value="#{reservationController.selected.NReservation}" title="#{bundle.EditReservationTitle_NReservation}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_NReservation}"/>
+                    <h:outputLabel value="#{bundle.EditReservationLabel_place}" for="place" />
+                    <h:selectOneMenu id="place" value="#{reservationController.selected.place}" title="#{bundle.EditReservationTitle_place}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_place}">
+                        <f:selectItems value="#{placeController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditReservationLabel_vol}" for="vol" />
+                    <h:selectOneMenu id="vol" value="#{reservationController.selected.vol}" title="#{bundle.EditReservationTitle_vol}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_vol}">
+                        <f:selectItems value="#{volController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditReservationLabel_dateReservation}" for="dateReservation" />
+                    <h:inputText id="dateReservation" value="#{reservationController.selected.dateReservation}" title="#{bundle.EditReservationTitle_dateReservation}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_dateReservation}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditReservationLabel_nomVoyageur}" for="nomVoyageur" />
+                    <h:inputText id="nomVoyageur" value="#{reservationController.selected.nomVoyageur}" title="#{bundle.EditReservationTitle_nomVoyageur}" required="true" requiredMessage="#{bundle.EditReservationRequiredMessage_nomVoyageur}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{reservationController.update}" value="#{bundle.EditReservationSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditReservationViewLink}"/>
+                <br />
+                <h:commandLink action="#{reservationController.prepareList}" value="#{bundle.EditReservationShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditReservationIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

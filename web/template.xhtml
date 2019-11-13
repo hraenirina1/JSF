@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title> PROJET GESTION AVION </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content=""/>
+        <meta name="author" content="Dashboard"/>
+        <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina"/>
+
+        <!-- Favicons -->        
+        <link href="/PROJET_JSF_AVION/faces/javax.faces.resource/img/favicon.png" rel="icon"/>
+        <link href="/PROJET_JSF_AVION/faces/javax.faces.resource/img/apple-touch-icon.png" rel="apple-touch-icon"/>
+
+        <!--Bootstrap core CSS--> 
+        <h:outputStylesheet library="css" name="lib/bootstrap/css/bootstrap.min.css"/>
+        
+        <!--external css-->
+        <h:outputStylesheet library="css" name="lib/font-awesome/css/font-awesome.css"/>
+        <h:outputStylesheet library="css" name="zabuto_calendar.css"/>
+        <h:outputStylesheet library="css" name="lib/gritter/css/jquery.gritter.css"/>
+
+        <!--Custom styles for this template--> 
+        <h:outputStylesheet library="css" name="style.css"/>
+        <h:outputStylesheet library="css" name="style-responsive.css"/>
+        
+        
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="css" name="lib/chart-master/Chart.js"/>
+
+    </h:head>
+    <h:body>
+        <section id="container">
+    <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+    <!--header start-->
+        <header class="header black-bg">
+          <div class="sidebar-toggle-box">
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Menu"></div>
+          </div>
+          <!--logo start-->
+          <h:link outcome="/index" styleClass="logo"> <b> JSF <span> Hibernate</span></b></h:link>
+          <!--logo end-->
+          <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+              <li><a class="logout" href="">Logout</a></li>
+            </ul>
+          </div>
+        </header>
+    <!--header end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+        <aside>
+      <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu" id="nav-accordion">
+            <p class="centered"><a href=""><h:graphicImage url="/PROJET_JSF_AVION/faces/javax.faces.resource/img/ui-sam.jpg" styleClass="img-circle" width="80"/></a></p>
+          <h5 class="centered"> La Team </h5>
+          
+           <li class="sub-menu">
+            <a href="javascript:;">
+              <i class="fa fa-desktop"></i>
+              <span> AVION </span>
+              </a>
+            <ul class="sub">
+              <li class="sub-menu">
+                <h:link styleClass="active" outcome="/avion/List">
+                <i class="fa fa-dashboard"></i>
+                <span> Listes </span>
+                </h:link>
+               </li>
+                
+                <li class="sub-menu">
+                    <!-- formulaire -->
+                    <h:form styleClass="jsfcrud_list_form">
+                        <h:commandLink action="#{avionController.prepareCreate}">
+                        <i class="fa fa-dashboard"></i>
+                        <span> Creation </span>
+                        </h:commandLink>
+                    </h:form>                
+               </li>
+            </ul>
+          </li>
+          <li class="sub-menu">
+              <h:link styleClass="active" outcome="/avion/List">
+              <i class="fa fa-dashboard"></i>
+              <span> Listes </span>
+              </h:link>
+          </li>
+          
+          <li class="sub-menu">
+              <h:link styleClass="" outcome="/place/List">
+              <i class="fa fa-dashboard"></i>
+              <span> Listes des Places </span>
+              </h:link>
+          </li>
+          
+          <li class="sub-menu">
+              <h:link styleClass="" outcome="/reservation/List">
+              <i class="fa fa-dashboard"></i>
+              <span> Listes des Reservations </span>
+              </h:link>
+          </li>
+          
+          <li class="sub-menu">
+              <h:link styleClass="" outcome="/vol/List">
+              <i class="fa fa-dashboard"></i>
+              <span> Listes des Vols </span>
+              </h:link>
+          </li>
+        </ul>
+        <!-- sidebar menu end-->
+      </div>
+    </aside>
+    <!--sidebar end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">                                
+                <h3> <i class="fa fa-angle-right"></i> <ui:insert name="title"> Emplacement de titre </ui:insert> </h3>
+            <div class="row mt">
+                <ui:insert name="body"> Emplacement du centre </ui:insert>
+                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+            </div>
+        <!-- /row -->
+            </section>                 
+    </section>
+    <!--main content end-->
+    <!--footer start-->
+    <footer class="site-footer">
+      <div class="text-center">
+        <p>
+            GOD TEAM
+        </p>
+        <div class="credits">
+            Hariniaina - Fenohasina - Franck
+        </div>
+        <a href="#" class="go-top">
+          <i class="fa fa-angle-up"></i>
+          </a>
+      </div>
+    </footer>
+    <!--footer end-->
+    
+  </section>
+  <!-- js placed at the end of the document so the pages load faster -->
+  <h:outputScript library="css" name="lib/chart-master/Chart.js"/>
+  <h:outputScript library="css" name="lib/jquery/jquery.min.js"/>
+
+  <h:outputScript library="css" name="lib/bootstrap/js/bootstrap.min.js"/>
+  <h:outputScript library="css" class="include" name="lib/jquery.dcjqaccordion.2.7.js"/>
+  <h:outputScript library="css" name="lib/jquery.scrollTo.min.js"/>
+  <h:outputScript library="css" name="lib/jquery.nicescroll.js"/>
+  <h:outputScript library="css" name="lib/jquery.sparkline.js"/>
+  <!--common script for all pages-->
+  <h:outputScript library="css" name="lib/common-scripts.js"/>
+  <h:outputScript library="css" name="lib/gritter/js/jquery.gritter.js"/>
+  <h:outputScript library="css" name="lib/gritter-conf.js"/>
+  <!--script for this page-->
+  <h:outputScript library="css" name="lib/sparkline-chart.js"/>
+  <h:outputScript library="css" name="lib/zabuto_calendar.js"/>
+  <script type="text/javascript">
+//    $(document).ready(function() {
+//      var unique_id = $.gritter.add({
+//        // (string | mandatory) the heading of the notification
+//        title: 'Welcome to Dashio!',
+//        // (string | mandatory) the text inside the notification
+//        text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
+//        // (string | optional) the image to display on the left
+//        image: 'img/ui-sam.jpg',
+//        // (bool | optional) if you want it to fade out on its own or just sit there
+//        sticky: false,
+//        // (int | optional) the time you want it to be alive for before fading out
+//        time: 8000,
+//        // (string | optional) the class name you want to apply to that specific message
+//        class_name: 'my-sticky-class'
+//      });
+//
+//      return false;
+//    });
+  </script>
+  <script type="application/javascript">
+    $(document).ready(function() {
+      $("#date-popover").popover({
+        html: true,
+        trigger: "manual"
+      });
+      $("#date-popover").hide();
+      $("#date-popover").click(function(e) {
+        $(this).hide();
+      });
+
+      $("#my-calendar").zabuto_calendar({
+        action: function() {
+          return myDateFunction(this.id, false);
+        },
+        action_nav: function() {
+          return myNavFunction(this.id);
+        },
+        ajax: {
+          url: "show_data.php?action=1",
+          modal: true
+        },
+        legend: [{
+            type: "text",
+            label: "Special event",
+            badge: "00"
+          },
+          {
+            type: "block",
+            label: "Regular event",
+          }
+        ]
+      });
+    });
+
+    function myNavFunction(id) {
+      $("#date-popover").hide();
+      var nav = $("#" + id).data("navigation");
+      var to = $("#" + id).data("to");
+      console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+    }
+  </script>
+        
+    </h:body>
+
+</html>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPlaceTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <div class="col-sm-12 col-md-6 col-md-offset-6">
+                                <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">                                    
+                                    <ul class="pagination">
+                                        
+                                        <li class="paginate_button page-item previous #{ placeController.pagination.PreviousExiste()}">
+                                            <h:commandLink action="#{placeController.previous}" class="page-link"> 
+                                                Précédent </h:commandLink>
+                                        </li>
+                                        
+                                        <ui:repeat value="#{placeController.pagination.list_page()}" var="page">
+                                        <li class="paginate_button page-item #{(page==(placeController.pagination.page + 1))? 'active' : '' } ">
+                                            <h:commandLink action="#{placeController.goPage(page)}" styleClass="page-link"> #{ page }</h:commandLink>
+                                        </li>
+                                        </ui:repeat>
+                                        
+                                        <li class="paginate_button page-item next #{ placeController.pagination.NextExiste()}">
+                                            <h:commandLink action="#{placeController.next}" styleClass="page-link"> 
+                                                Suivant</h:commandLink></li>
+                                    </ul>
+                                </div>
+                            </div> 
+                <!-- message -->
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                
+                <!--message a affiche si vide-->
+                <h:outputText escape="false" value="#{bundle.ListPlaceEmpty}" rendered="#{placeController.items.rowCount == 0}"/>
+                
+                <!--table des places-->
+                <h:panelGroup rendered="#{placeController.items.rowCount > 0}"> 
+                    
+                    <h:commandLink action="#{placeController.previous}" value="#{bundle.Previous} #{placeController.pagination.pageSize}" rendered="#{placeController.pagination.hasPreviousPage}"/>&nbsp;
+                    
+                    <h:commandLink action="#{placeController.next}" value="#{bundle.Next} #{placeController.pagination.pageSize}" rendered="#{placeController.pagination.hasNextPage}"/>&nbsp;
+                    
+                    <h:dataTable value="#{placeController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlaceTitle_avion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.avion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPlaceTitle_occupation}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.occupation}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{placeController.prepareView}" value="#{bundle.ListPlaceViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{placeController.prepareEdit}" value="#{bundle.ListPlaceEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{placeController.destroy}" value="#{bundle.ListPlaceDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{placeController.prepareCreate}" value="#{bundle.ListPlaceCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPlaceIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

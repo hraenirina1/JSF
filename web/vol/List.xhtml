@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListVolTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListVolEmpty}" rendered="#{volController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{volController.items.rowCount > 0}">
+                    <h:outputText value="#{volController.pagination.pageFirstItem + 1}..#{volController.pagination.pageLastItem + 1}/#{volController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{volController.previous}" value="#{bundle.Previous} #{volController.pagination.pageSize}" rendered="#{volController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{volController.next}" value="#{bundle.Next} #{volController.pagination.pageSize}" rendered="#{volController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{volController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVolTitle_NVol}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.NVol}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVolTitle_avion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.avion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVolTitle_heureDepart}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.heureDepart}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVolTitle_heureArrive}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.heureArrive}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVolTitle_villeDepart}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.villeDepart}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVolTitle_vileArrive}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.vileArrive}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{volController.prepareView}" value="#{bundle.ListVolViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{volController.prepareEdit}" value="#{bundle.ListVolEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{volController.destroy}" value="#{bundle.ListVolDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{volController.prepareCreate}" value="#{bundle.ListVolCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListVolIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
